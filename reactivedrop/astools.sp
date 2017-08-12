@@ -291,21 +291,21 @@ public Action cmdClSkill(int client, const char[] command, int argc)
 
 public Action cmdClKick(int client, const char[] command, int argc)
 {
-	if (g_iImmunityLvl > 0)
-	{
-		char StrArg[64];
-		AdminId targetadm;
-		GetCmdArg(1, StrArg, sizeof(StrArg));
-		int newVal = StringToInt(StrArg);
-		if (newVal > 0)
-		{
-			//cl_kickvote -1 = unselect
-			targetadm = GetUserAdmin(newVal);
-			newVal = GetAdminImmunityLevel(targetadm);
-			if (newVal >= g_iImmunityLvl)
-				return Plugin_Handled;
-		}
-	}
+	if (g_iImmunityLvl <= 0)
+		return Plugin_Continue;
+	
+	char StrArg[64];
+	GetCmdArg(1, StrArg, sizeof(StrArg));
+	StripQuotes(StrArg);
+	int newVal = StringToInt(StrArg);
+	if (newVal <= 0 || !IsClientConnected(newVal))
+		return Plugin_Continue;
+	//cl_kickvote -1 = unselect
+	AdminId targetadm = GetUserAdmin(newVal);
+	newVal = GetAdminImmunityLevel(targetadm);
+	if (newVal >= g_iImmunityLvl)
+		return Plugin_Handled;
+
 	return Plugin_Continue;
 }
 
