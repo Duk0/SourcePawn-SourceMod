@@ -1,0 +1,57 @@
+// Advertisements 0.5
+// by Tsunami
+// 
+// Types
+// -----
+// C: Center message
+// H: Hint message
+// M: Menu message
+// S: Say message
+//    - Colors:  {DEFAULT}, {TEAM}, {GREEN}, {LIGHTGREEN}
+//    - Example: {GREEN}Current {LIGHTGREEN}Map: {DEFAULT}{CURRENTMAP}
+// T: Top message
+//    - Colors:  {WHITE},  {RED},  {GREEN}, {BLUE}, {YELLOW}, {PURPLE}, {CYAN},
+//               {ORANGE}, {PINK}, {OLIVE}, {LIME}, {VIOLET}, {LIGHTBLUE}
+//    - Example: {ORANGE} www.domain.com
+//
+// Flags (optional)
+// -----
+// Accepts flags of admins that will not see the advertisement.
+// When omitted everyone will see the advertisement.
+// When left empty only admins will see the advertisement.
+
+"Advertisements"
+{
+	"1"
+	{
+		"type"		"S"
+		"text"		"{GREEN}Visit www.dodportal.net"
+	}
+	"2"
+	{
+		"type"		"S"
+		"text"		"{GREEN}Dodportal.net"
+	}
+	"3"
+	{
+		"type"		"S"
+		"text"		"Next map is {SM_NEXTMAP} in {TIMELEFT} minutes."
+		"flags"		"cft"
+	}
+	"4"
+	{
+		"type"		"T"
+		"text"		"100 Tick"
+		
+	}
+	"5"
+	{
+		"type"		"T"
+		"text"		"www.dodportal.net"
+	}
+	"6"
+	{
+		"type"		"S"
+		"text"		"{GREEN}HlStatsX:CE: {DEFAULT}www.rank.dodportal.net"
+	}
+}
