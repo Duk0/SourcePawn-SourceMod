@@ -19,7 +19,8 @@
 
 #define PLUGIN_VERSION "1.1"
 //char g_szWelcomeSound[] = "joinserver/dodportal/welcomka.mp3";
-char g_szWelcomeSound[] = "Welcome_Veterans.wav";
+//char g_szWelcomeSound[] = "Welcome_Veterans.wav";
+char g_szWelcomeSound[] = "czsk_veterans/welcome.mp3";
 
 // Plugin definitions
 public Plugin myinfo = 
