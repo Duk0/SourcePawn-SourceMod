@@ -1,0 +1,117 @@
+"Games"
+{
+	"synergy"
+	{
+		"Offsets"
+		{
+			"CBaseEntity::IsAlive"
+			{
+				"windows"	"65"
+				"linux"		"66"
+				"mac"		"66"
+			}
+			"CBaseEntity::IsNPC"
+			{
+				"windows"	"70"
+				"linux"		"71"
+				"mac"		"71"
+			}
+			"CBaseEntity::IsMoving"
+			{
+				"windows"	"74"
+				"linux"		"75"
+				"mac"		"75"
+			}
+			"CBaseCombatCharacter::FVisible"
+			{
+				"windows"	"141"
+				"linux"		"142"
+				"mac"		"142"
+			}
+			"CBaseCombatCharacter::FVisibleEx"
+			{
+				"windows"	"142"
+				"linux"		"143"
+				"mac"		"143"
+			}
+			"CBaseCombatCharacter::IRelationType"
+			{
+				"windows"	"296"
+				"linux"		"297"
+				"mac"		"297"
+			}
+			"CBaseCombatCharacter::IRelationPriority"
+			{
+				"windows"	"297"
+				"linux"		"298"
+				"mac"		"298"
+			}
+			"CBasePlayer::IsInAVehicle"
+			{
+				"windows"	"298"
+				"linux"		"299"
+				"mac"		"299"
+			}
+			"CBaseCombatCharacter::ExitVehicle"
+			{
+				"windows"	"301"
+				"linux"		"302"
+				"mac"		"302"
+			}
+			"CHL2MP_Player::StartObserverMode"
+			{
+				"windows"	"375"
+				"linux"		"376"
+				"mac"		"376"
+			}
+			"CBasePlayer::SetObserverMode"
+			{
+				"windows"	"378"
+				"linux"		"379"
+				"mac"		"379"
+			}
+			"CBasePlayer::GetObserverMode"
+			{
+				"windows"	"379"
+				"linux"		"380"
+				"mac"		"380"
+			}
+			"CBasePlayer::SetObserverTarget"
+			{
+				"windows"	"380"
+				"linux"		"381"
+				"mac"		"381"
+			}
+			"CBasePlayer::GetObserverTarget"
+			{
+				"windows"	"382"
+				"linux"		"383"
+				"mac"		"383"
+			}
+			"CBasePlayer::IsValidObserverTarget"
+			{
+				"windows"	"385"
+				"linux"		"386"
+				"mac"		"386"
+			}
+			"CBasePlayer::ForceObserverMode"
+			{
+				"windows"	"388"
+				"linux"		"389"
+				"mac"		"389"
+			}
+			"CBasePlayer::ValidateCurrentObserverTarget"
+			{
+				"windows"	"390"
+				"linux"		"391"
+				"mac"		"391"
+			}
+			"CBasePlayer::LeaveVehicle"
+			{
+				"windows"	"399"
+				"linux"		"400"
+				"mac"		"400"
+			}
+		}
+	}
+}
