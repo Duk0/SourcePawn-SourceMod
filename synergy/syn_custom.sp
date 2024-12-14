@@ -37,7 +37,7 @@ bool g_bFirstVote = false;
 int g_iTypeVote = 0;
 bool g_bMapLoaded = false;
 int g_iCollisionGroup;
-bool g_bInvisAlyxFix = false;
+//bool g_bInvisAlyxFix = false;
 char g_szSteamAuthId[MAXPLAYERS+1][32];
 char g_szServerIP[24];
 
@@ -57,7 +57,7 @@ public void OnPluginStart()
 	
 	GetServerIp(g_szServerIP, sizeof(g_szServerIP));
 	
-	RegConsoleCmd("sm_fix", Command_Fix, "Fix invisible npc");
+//	RegConsoleCmd("sm_fix", Command_Fix, "Fix invisible npc");
 	
 	AddCommandListener(Cmd_VoteStart, "vote_start");
 
@@ -139,14 +139,14 @@ public void OnPluginStart()
 	
 	LoadTranslations("basetriggers.phrases");
 }
-
+/*
 public Action Command_Fix(int client, int args)
 {
 //	ClientCommand(client, "disconnect;wait 100;map syn syn_deadsimple;wait 1000;disconnect;wait 100;connect %s", g_szServerIP);
 	ClientCommand(client, "disconnect;wait 100;map hl2 background05;wait 1000;disconnect;wait 100;connect %s", g_szServerIP);
 	return Plugin_Handled;
 }
-
+*/
 public Action Cmd_VoteStart(int client, const char[] command, int argc)
 {
 	if (client == 0)
@@ -350,9 +350,9 @@ public void OnEntityCreated(int entity, const char[] classname)
 		CreateTimer(0.1, Timer_BatteryDrop, EntIndexToEntRef(entity), TIMER_FLAG_NO_MAPCHANGE);
 		return;
 	}
-	
+/*	
 	if (g_bInvisAlyxFix && StrEqual(classname, "npc_alyx"))
-		InvisibleAlyxFix(entity);
+		InvisibleAlyxFix(entity);*/
 }
 /*
 public void OnEntityDestroyed(int entity)
@@ -490,19 +490,19 @@ public Event_PlayerChangeName(Handle:event, const String:name[], bool:dontBroadc
 //	PrintToConsoleAll("[SYNCUS] %i %N change name from %s to %s", client, client, oldname, newname);
 }
 */
-
+/*
 public void OnClientPutInServer(int client)
 {
 	if (IsFakeClient(client))
 		return;
 
-/*	char plname[64];
-	bool ret = GetClientName(client, plname, sizeof(plname));
-	if (!ret || plname[0] == '\0' || IsNameWhiteSpaced(plname))
-	{
-		SetClientInfo(client, "name", ".unnamed.");
-		LogMessage("[SYNCUS] Player %s has bad name", plname);
-	}*/
+//	char plname[64];
+//	bool ret = GetClientName(client, plname, sizeof(plname));
+//	if (!ret || plname[0] == '\0' || IsNameWhiteSpaced(plname))
+//	{
+//		SetClientInfo(client, "name", ".unnamed.");
+//		LogMessage("[SYNCUS] Player %s has bad name", plname);
+//	}
 
 	char authid[32];
 	GetClientAuthId(client, AuthId_Steam3, authid, sizeof(authid));
@@ -513,6 +513,7 @@ public void OnClientPutInServer(int client)
 //	ClientCommand(client, "cl_customsounds 1;cl_ejectbrass 1;cl_help_msgs 0;cl_allowdownload 1;cl_allowupload 1;cl_downloadfilter all;echo ]");
 	ClientCommand(client, "cl_ejectbrass 1;echo ]");
 }
+*/
 /*
 public void OnClientDisconnect(int client)
 {
@@ -724,13 +725,13 @@ public void OnConfigsExecuted()
 		g_Cvar_SaveDisable.IntValue = 0;*/
 
 	// Ivisible Alyx fix
-	g_bInvisAlyxFix = false;
+/*	g_bInvisAlyxFix = false;
 	
 	if (strncmp(currentMap, "ep1_citadel_", 12) == 0 || strncmp(currentMap, "ep1_c17_", 8) == 0 || strncmp(currentMap, "ep2_outland_", 12) == 0)
 	{
 		InvisibleAlyxFix();
 		g_bInvisAlyxFix = true;
-	}
+	}*/
 }
 /*
 public Action ExecTimer(Handle timer)

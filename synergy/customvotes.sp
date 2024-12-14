@@ -887,7 +887,8 @@ void CVote_DoVote(int client, const char[] votename, const char[][] vparams, int
 	ProcessTemplateString(votetitle, sizeof(votetitle), cvote.title);
 	ReplaceParams(votetitle, sizeof(votetitle), vparams, vparamct, cvote.paramtypes, true);
 
-	int statusidx = GetStatusIndex(voteidx, client, vparams, vparamct);
+	//int statusidx = GetStatusIndex(voteidx, client, vparams, vparamct);
+	int statusidx = GetStatusIndex(voteidx, vparams, vparamct);
 	if (statusidx == INVALID_VOTE)
 		statusidx = CreateStatus(voteidx, client, vparams, vparamct);
 	if (statusidx == INVALID_VOTE)
@@ -1269,7 +1270,8 @@ public Action Timer_ExecuteCommand(Handle timer, DataPack strpack)
 }
 
 // Get the index for an existing vote status, or create a new one and return the index
-stock int GetStatusIndex(int voteidx, int vsender, const char[][] vparams, int vparamct)
+//stock int GetStatusIndex(int voteidx, int vsender, const char[][] vparams, int vparamct)
+stock int GetStatusIndex(int voteidx, const char[][] vparams, int vparamct)
 {
 	int ssize = g_voteStatus.Length;
 	char tparam[64];

@@ -40,7 +40,7 @@
 #include <sdktools>
 #define PLUGIN_VERSION "1.6"
 
-//#define KEYVALUE
+#define KEYVALUE
 
 char g_szFileLoc[192];
 char g_szLogPath[PLATFORM_MAX_PATH];
