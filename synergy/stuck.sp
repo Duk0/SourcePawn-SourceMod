@@ -71,7 +71,7 @@ public void OnPluginStart()
 
 public void OnMapStart() 
 {
-	for (int i = 0; i < MaxClients; i++)
+	for (int i = 1; i <= MaxClients; i++)
 		Counter[i] = 0;
 }
 
@@ -111,7 +111,7 @@ stock bool IsValidClient(int iClient)
 
 public Action Timer(Handle timer)
 {
-	for (int i = 0; i < MaxClients; i++)
+	for (int i = 1; i <= MaxClients; i++)
 	{
 		if (!IsValidClient(i))
 			continue;
@@ -134,8 +134,8 @@ public Action Timer(Handle timer)
 
 public Action StuckCmd(int iClient, int Args)
 {
-	if (iClient <= 0) return Plugin_Handled;
-	if (iClient > MaxClients) return Plugin_Handled;
+	if (!IsValidClient(iClient)) return Plugin_Handled;
+
 	if (!IsPlayerAlive(iClient))
 	{
 		PrintToChat(iClient, "[!stuck] How a death can be stuck !?");
@@ -205,10 +205,10 @@ stock void CheckIfPlayerCanMove(int iClient, int testID, float X = 0.0, float Y 
 	
 	SetEntPropVector(iClient, Prop_Data, "m_vecBaseVelocity", vecVelo);
 	
-	//DataPack TimerDataPack;
-	DataPack TimerDataPack = new DataPack();
-	//CreateDataTimer(0.1, TimerWait, TimerDataPack, TIMER_FLAG_NO_MAPCHANGE); 
-	CreateTimer(0.1, TimerWait, TimerDataPack, TIMER_FLAG_NO_MAPCHANGE); 
+	DataPack TimerDataPack;
+	CreateDataTimer(0.1, TimerWait, TimerDataPack, TIMER_FLAG_NO_MAPCHANGE);
+	//DataPack TimerDataPack = new DataPack();
+	//CreateTimer(0.1, TimerWait, TimerDataPack, TIMER_FLAG_NO_MAPCHANGE); 
 	TimerDataPack.WriteCell(iClient);
 	TimerDataPack.WriteCell(testID);
 	TimerDataPack.WriteFloat(vecOrigin[0]);
@@ -227,9 +227,9 @@ public Action TimerWait(Handle timer, DataPack data)
 	vecOrigin[0]		= data.ReadFloat();
 	vecOrigin[1]		= data.ReadFloat();
 	vecOrigin[2]		= data.ReadFloat();
-	delete data;
+//	delete data;
 
-	if (!IsValidClient(iClient)) return Plugin_Stop;
+	if (!IsValidClient(iClient) || !IsPlayerAlive(iClient)) return Plugin_Stop;
 	
 	GetClientAbsOrigin(iClient, vecOriginAfter);
 	

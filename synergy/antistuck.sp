@@ -119,7 +119,7 @@ public void OnAllPluginsLoaded()
 
 public void OnMapStart()
 {
-	for(int i = 1; i <= MaxClients; i++)
+	for (int i = 1; i <= MaxClients; i++)
 	{
 		g_iCounter[i] = 0;
 		g_iStuckCheck[i] = -1;
@@ -143,7 +143,7 @@ public void OnConVarChange(ConVar cvar, const char[] oldVal, const char[] newVal
 {
 	if (cvar == c_Countdown) {
 		g_iTimeLimit = StringToInt(newVal);
-		if(g_iTimeLimit < 0)
+		if (g_iTimeLimit < 0)
 			g_iTimeLimit = -g_iTimeLimit;
 
 		LogMessage("stuck_wait = %i", g_iTimeLimit);
@@ -246,7 +246,6 @@ stock bool IsValidClient(int client)
 
 public Action StuckCmd(int client, any args)
 {
-	
 	if (!IsValidClient(client)) return Plugin_Handled;
 	
 	if (!IsPlayerAlive(client))
@@ -439,21 +438,21 @@ public Action TimerWait(Handle timer, DataPack data)
 	float DegreeAngle	= data.ReadFloat();
 	delete data;
 
-	if (!IsValidClient(client)) return Plugin_Stop;
+	if (!IsValidClient(client) || !IsPlayerAlive(client)) return Plugin_Stop;
 	
 	GetClientAbsOrigin(client, vecOriginAfter);
 	
-	if(GetVectorDistance(vecOrigin, vecOriginAfter, false) < 8.0) // Can't move
+	if (GetVectorDistance(vecOrigin, vecOriginAfter, false) < 8.0) // Can't move
 	{
-		if(testID == 0) {
+		if (testID == 0) {
 			CheckIfPlayerCanMove(client, 1, 0.0, 0.0, -500.0, Radius, pos_Z, DegreeAngle);	// Jump
-		} else if(testID == 1) {
+		} else if (testID == 1) {
 			CheckIfPlayerCanMove(client, 2, -500.0, 0.0, 0.0, Radius, pos_Z, DegreeAngle);
-		} else if(testID == 2) {
+		} else if (testID == 2) {
 			CheckIfPlayerCanMove(client, 3, 0.0, 500.0, 0.0, Radius, pos_Z, DegreeAngle);
-		} else if(testID == 3) {
+		} else if (testID == 3) {
 			CheckIfPlayerCanMove(client, 4, 0.0, -500.0, 0.0, Radius, pos_Z, DegreeAngle);
-		} else if(testID == 4) {
+		} else if (testID == 4) {
 			CheckIfPlayerCanMove(client, 5, 0.0, 0.0, 300.0, Radius, pos_Z, DegreeAngle);
 		} else {
 			if (Radius == 1.0 && pos_Z == 1.0 && DegreeAngle == 1.0) {
@@ -467,7 +466,7 @@ public Action TimerWait(Handle timer, DataPack data)
 			}
 		}
 	} else {
-		if(g_iStuckCheck[client] < 2 && g_iStuckCheck[client] != -1) {
+		if (g_iStuckCheck[client] < 2 && g_iStuckCheck[client] != -1) {
 			PrintToChat(client, "[Stuck] You do not appear to be stuck.");
 			TeleportEntity(client, g_fOriginalPos[client], NULL_VECTOR, g_fOriginalVel[client]); //Reset to original pos / velocity
 			//Enable controls
@@ -501,7 +500,7 @@ public Action CheckWait(Handle timer, DataPack data)
 	float DegreeAngle	= data.ReadFloat();
 	delete data;
 
-	if (!IsValidClient(client)) return Plugin_Stop;
+	if (!IsValidClient(client) || !IsPlayerAlive(client)) return Plugin_Stop;
 
 	DelayTimer[client] = null;
 	TryFixPosition(client, Radius, pos_Z, DegreeAngle);
