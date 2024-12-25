@@ -253,6 +253,12 @@ public Action StuckCmd(int client, any args)
 		PrintToChat(client, "[Stuck] You must be alive to use this command");
 		return Plugin_Handled;
 	}
+
+	if (Client_IsInVehicle(client))
+		return Plugin_Handled;
+
+	if (PlayerReachChangeLevel(client))
+		return Plugin_Handled;
 	
 	if (c_RoundTime.IntValue >= 1) {
 		if (g_bRoundRestrict) {
@@ -326,6 +332,27 @@ public Action StuckCmd(int client, any args)
 	return Plugin_Handled;
 }
 
+stock int Client_GetVehicle(int client)
+{
+	return GetEntPropEnt(client, Prop_Send, "m_hVehicle");
+}
+
+stock bool Client_IsInVehicle(int client)
+{
+	return !(Client_GetVehicle(client) == -1);
+}
+
+stock bool PlayerReachChangeLevel(int client)
+{
+	int flags = GetEntityFlags(client);
+	if (GetEntityRenderMode(client) == RENDER_TRANSALPHA && GetEntityRenderFx(client) == RENDERFX_DISTORT &&
+		flags & FL_FROZEN && flags & FL_GODMODE && flags & FL_NOTARGET)
+	{
+		return true;
+	}
+
+	return false;
+}
 
 public Action FDelayTimer(Handle timer, any client)
 {

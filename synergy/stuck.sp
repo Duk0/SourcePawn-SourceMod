@@ -141,6 +141,12 @@ public Action StuckCmd(int iClient, int Args)
 		PrintToChat(iClient, "[!stuck] How a death can be stuck !?");
 		return Plugin_Handled;
 	}
+
+	if (Client_IsInVehicle(iClient))
+		return Plugin_Handled;
+
+	if (PlayerReachChangeLevel(iClient))
+		return Plugin_Handled;
 	
 	if (c_Limit.IntValue > 0 && Counter[iClient] >= c_Limit.IntValue)
 	{
@@ -153,6 +159,28 @@ public Action StuckCmd(int iClient, int Args)
 	StartStuckDetection(iClient);
 	
 	return Plugin_Handled;
+}
+
+stock int Client_GetVehicle(int client)
+{
+	return GetEntPropEnt(client, Prop_Send, "m_hVehicle");
+}
+
+stock bool Client_IsInVehicle(int client)
+{
+	return !(Client_GetVehicle(client) == -1);
+}
+
+stock bool PlayerReachChangeLevel(int client)
+{
+	int flags = GetEntityFlags(client);
+	if (GetEntityRenderMode(client) == RENDER_TRANSALPHA && GetEntityRenderFx(client) == RENDERFX_DISTORT &&
+		flags & FL_FROZEN && flags & FL_GODMODE && flags & FL_NOTARGET)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void StartStuckDetection(int iClient)
